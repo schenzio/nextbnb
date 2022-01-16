@@ -29,11 +29,13 @@ export default function Header(props) {
           <nav>
             <ul>
               <li>
-                <a href="/" onClick={() => {
-                    setLoggedOut()
-                    }}>
-                  Logout
-                </a>
+                <Link href="/">
+                  <a onClick={() => {
+                      setLoggedOut()
+                      }}>
+                    Logout
+                  </a>
+                </Link>
               </li>
             </ul>
           </nav>
@@ -41,14 +43,18 @@ export default function Header(props) {
         <nav>
             <ul>
                 <li>
-                    <a href="#" onClick={() => setShowRegistrationModal()}>
-                      Sign up
-                    </a>
+                    <Link href="/">
+                      <a onClick={() => setShowRegistrationModal()}>
+                        Sign up
+                      </a>
+                    </Link>
                 </li>
                 <li>
-                  <a href="#" onClick={() => setShowLoginModal()}>
-                    Log in
-                  </a>
+                  <Link href="/">
+                      <a onClick={() => setShowLoginModal()}>
+                        Log in
+                      </a>
+                    </Link>
                 </li>
             </ul>
         </nav>

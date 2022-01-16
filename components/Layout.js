@@ -28,10 +28,10 @@ export default function Layout(props) {
     
     return (
       <div>
-        {/* add the Stripe frontend code */}
+        {/* add the Stripe frontend code 
         <Head>
           <script src='https://js.stripe.com/v3/'></script>
-        </Head>
+        </Head>*/}
         <Header />
         <main>{props.content}</main>
         {
