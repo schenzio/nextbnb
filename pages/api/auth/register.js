@@ -1,4 +1,4 @@
-import {User, House} from '../../../model.js'
+import {User} from '../../../model.js'
 import Cookies from 'cookies'
 
 const randomString = (length) => { //create randomical string which we'll use as session_token
@@ -15,8 +15,6 @@ export default async (req, res) =>{
         res.status(405).end() //Method Not Allowed
         return
       }
-    //House.sync() we have used it to create the table, now it's no necessary anymore
-    
     //console.log(req.body)
 
     const { email, password, passwordconfirmation } = req.body
@@ -40,11 +38,11 @@ export default async (req, res) =>{
         d.setDate(d.getDate() + 30)
 
         User.update(
-        {
-            session_token: sessionToken,
-            session_expiration: d
-        },
-        { where: { email } }
+          {
+              session_token: sessionToken,
+              session_expiration: d
+          },
+          { where: { email } }
         )
         
         const cookies = new Cookies(req, res)

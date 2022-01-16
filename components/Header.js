@@ -1,9 +1,8 @@
 import Link from "next/link"
 import { useStoreState, useStoreActions } from 'easy-peasy'
-import Cookies from 'cookies'
-import { useEffect } from 'react'
+import axios from "axios"
 
-export default function Header(props) {
+export default function Header() {
   //initialize the actions and the states we have to use in this component (we get them from store.js)
   const setShowLoginModal = useStoreActions(
     (actions) => actions.modals.setShowLoginModal
@@ -13,11 +12,7 @@ export default function Header(props) {
   )
   const loggedIn = useStoreState((state) => state.login.loggedIn)
   const setLoggedOut = useStoreActions((actions) => actions.login.setLoggedOut)
-  useEffect(()=>{
-    if ((loggedIn)){
-      console.log(props.cookies)
-    }
-  })
+
   return (
     <div className="nav-container">
       <Link href="/">
@@ -30,7 +25,13 @@ export default function Header(props) {
             <ul>
               <li>
                 <Link href="/">
-                  <a onClick={() => {
+                  <a onClick={ async () => {
+                      const response = await axios.post('/api/auth/logout', {})
+                      console.log(response)
+                      if (response.data.status === 'error') {
+                          alert(response.data.message)
+                          return
+                      }
                       setLoggedOut()
                       }}>
                     Logout
@@ -97,10 +98,4 @@ export default function Header(props) {
     `}</style>
     </div>
   )
-}
-export async function getServerSideProps({ req, res, query }) {
-  const cookies = req.cookies
-  return { props: {
-      cookies: cookies
-    } }
 }

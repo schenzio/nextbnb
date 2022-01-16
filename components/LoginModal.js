@@ -17,6 +17,7 @@ export default function LoginModal(props) {
   
       if (response.data.status === 'error') {
         alert(response.data.message)
+        return
       }
       //if login submit is correct, we set new state values
       setLoggedIn(true)

@@ -10,7 +10,6 @@ export default function Home({ nextbnb_session, houses }) {
   const setLoggedIn = useStoreActions((actions) => actions.login.setLoggedIn)
   useEffect(() => {
     if ( nextbnb_session ) {
-      //console.log(nextbnb_session)
       setLoggedIn(true)
     }
   }, [])

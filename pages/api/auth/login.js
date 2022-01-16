@@ -37,7 +37,7 @@ export default async (req, res) => {
   let sessionToken = null
   const sessionExpiration = new Date()
   sessionExpiration.setDate(sessionExpiration.getDate() + 30) //30 days from current date
-  if (new Date(user.session_expiration) < new Date()) { //if old session token is expired, we replace it with new generated session token
+  if (new Date(user.session_expiration) < new Date()) { //if old session in db token is expired, we replace it with new generated session token
     sessionToken = randomString(255)
     User.update(
       {

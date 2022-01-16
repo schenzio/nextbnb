@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { useStoreActions } from 'easy-peasy'
+import Link from 'next/link'
 
 export default function RegistrationModal(props) {
     const [email, setEmail] = useState('')
@@ -27,7 +28,9 @@ export default function RegistrationModal(props) {
         <>
         <h2>Sign up</h2>
         <div>
-            <form onSubmit={submit}>
+            <form onSubmit={event => {
+		          submit()
+		          event.preventDefault()}}>
                 <input
                     id="email" 
                     type="email" 
@@ -50,9 +53,11 @@ export default function RegistrationModal(props) {
         </div>
         <p>
             Already have an account?{' '}
-            <a href="#" onClick={() => props.showLogin()}>{/*CAMBIARE CON #*/}
-                Log in
-            </a>
+            <Link href="/">
+                <a onClick={() => props.showLogin()}>
+                    Log in
+                </a>
+            </Link>
         </p>
         </>
     )
