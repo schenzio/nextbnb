@@ -119,33 +119,17 @@ export default function House( { house, nextbnb_session, bookedDates }) {
                               alert('The dates chosen are not valid')
                               return
                             }
-                            const sessionResponse = await axios.post('/api/stripe/session', {
-                              amount: house.price * numberOfNightsBetweenDates
-                            })
-                            if (sessionResponse.data.status === 'error') {
-                              alert(sessionResponse.data.message)
-                              return
-                            }
-                            
-                            const sessionId = sessionResponse.data.sessionId
-                            const stripePublicKey = sessionResponse.data.stripePublicKey
-
                             try {
                               const response = await axios.post('/api/reserve', {
                                 houseId: house.id,
                                 startDate,
-                                endDate,
-                                sessionId
+                                endDate
                               })
                               if (response.data.status === 'error') {
                                 alert(response.data.message)
                                 return
                               }
                               console.log(response.data)
-                              const stripe = Stripe(stripePublicKey)
-                              const { error } = await stripe.redirectToCheckout({
-                                sessionId
-                              })
 
                             } catch (error) {
                               console.log(error)
